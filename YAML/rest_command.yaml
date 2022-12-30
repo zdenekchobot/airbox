@@ -1,0 +1,57 @@
+## add line 'rest_command: !include rest_command.yaml' to configuration.yaml !!  
+
+send_luftdaten_pm:
+  url: http://api.sensor.community/v1/push-sensor-data/
+  method: POST
+  content_type: "application/json"
+  timeout: 30
+  headers:
+    X-Pin: 1 ## SPS30 data
+    X-Sensor: !secret luftdaten_x_sensor
+  payload: >-
+    {
+      "software_version": "HomeAssistant",
+      "sensordatavalues":[
+        {"value_type":"P2","value":"{{ states('sensor.airbox_pm_2_5um') }}"},
+        {"value_type":"P1","value":"{{ states('sensor.airbox_pm_10um') }}"}
+      ]
+    }
+
+send_luftdaten_tph:
+  url: http://api.sensor.community/v1/push-sensor-data/
+  method: POST
+  content_type: "application/json"
+  timeout: 30
+  headers:
+    X-Pin: 11 ## BME280 data
+    X-Sensor: !secret luftdaten_x_sensor
+  payload: >-
+    {
+      "software_version": "HomeAssistant",
+      "sensordatavalues":[
+        {"value_type":"temperature","value":"{{ states('sensor.airbox_bme280_temperature') }}"},
+        {"value_type":"pressure","value":"{{ ((states('sensor.airbox_bme280_pressure') | float(default=0)) * 100) | round }}"},
+        {"value_type":"humidity","value":"{{ states('sensor.airbox_bme280_humidity') }}"}
+      ]
+    }
+# Push to Madavi. This is related to Luftdaten and stores data for use in Grafana.
+send_madavi:
+  url: http://api-rrd.madavi.de/data.php
+  method: POST
+  content_type: "application/json"
+  headers:
+    X-Pin: 0
+    X-Sensor: !secret luftdaten_x_sensor
+  payload: >-
+    {
+      "software_version": "HomeAssistant", 
+      "sensordatavalues":[
+        {"value_type":"P0","value":"{{ states('sensor.airbox_pm_1um') }}"},
+        {"value_type":"P2","value":"{{ states('sensor.airbox_pm_2_5um') }}"},
+        {"value_type":"P4","value":"{{ states('sensor.airbox_pm_4um') }}"},
+        {"value_type":"P1","value":"{{ states('sensor.airbox_pm_10um') }}"},
+        {"value_type":"BME280_temperature","value":"{{ states('sensor.airbox_bme280_temperature') }}"},
+        {"value_type":"BME280_pressure","value":"{{ ((states('sensor.airbox_bme280_pressure') | float(default=0)) * 100) | round }}"},
+        {"value_type":"BME280_humidity","value":"{{ states('sensor.airbox_bme280_humidity') }}"}
+      ]
+    }

@@ -1,0 +1,34 @@
+- id: '1672350685488'
+  alias: Sensor.Community
+  description: ''
+  trigger:
+  - platform: time_pattern
+    seconds: '5'
+    hours: '*'
+    minutes: /2
+  condition:
+  - condition: not
+    conditions:
+    - condition: template
+      value_template: '{{ states(''sensor.airbox_pm_2_5um'') in [''unknown'',''unavailable'']
+        }}'
+    - condition: template
+      value_template: '{{ states(''sensor.airbox_pm_10um'') in [''unknown'',''unavailable'']
+        }}'
+    - condition: template
+      value_template: '{{ states(''sensor.airbox_bme280_humidity'') in [''unknown'',''unavailable'']
+        }}'
+    - condition: template
+      value_template: '{{ states(''sensor.airbox_bme280_pressure'') in[''unknown'',''unavailable'']
+        }}'
+    - condition: template
+      value_template: '{{ states(''sensor.airbox_bme280_temperature'') in [''unknown'',''unavailable'']
+        }}'
+  action:
+  - service: rest_command.send_luftdaten_pm
+    data: {}
+  - service: rest_command.send_madavi
+    data: {}
+  - service: rest_command.send_luftdaten_tph
+    data: {}
+  mode: single

@@ -1,0 +1,128 @@
+esphome:
+  name: airbox
+
+esp8266:
+  board: esp07
+
+i2c:
+  - id: bus_a
+    sda: GPIO0  #D3
+    scl: GPIO2  #D4 
+    scan: True
+
+# Enable logging
+logger: 
+  level: INFO
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "TOfs2rJCtIp/9dy8yjqE9XkabR81tHzxCQAajmeBZQI="
+
+ota:
+  password: "1547e8a12c61e76795c9fa0fd143165c"
+
+wifi:
+  fast_connect: True
+  ssid: !secret wifi_ssid ## create your own secret.yaml file
+  password: !secret wifi_password ## create your own secret.yaml file
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "airbox Fallback Hotspot"
+    password: "buPtbyk6mLkS"
+
+captive_portal:
+    
+sensor:
+  - platform: bme280
+    temperature:
+      name: "airbox BME280 Temperature"
+      oversampling: 16x
+      id: "airbox_temperature"
+      unit_of_measurement: "°C"
+      device_class: "temperature"
+      accuracy_decimals: 1
+    pressure:
+      name: "airbox BME280 Pressure"
+      id: "airbox_pressure"
+      unit_of_measurement: "hPa"
+      device_class: "pressure"
+      accuracy_decimals: 2
+    humidity:
+      name: "airbox BME280 Humidity"
+      id: "airbox_humidity"
+      unit_of_measurement: "%"
+      device_class: "humidity"
+      accuracy_decimals: 1
+    iir_filter: 4x
+    i2c_id: bus_a
+    address: 0x76
+    update_interval: 15s
+    
+  - platform: sps30
+    pm_1_0:
+      name: "airbox PM <1µm"  #Weight concentration
+      id: "airbox_pm1"
+      icon: "mdi:blur"
+      unit_of_measurement: "µg/m³"
+      accuracy_decimals: 1
+    pm_2_5:
+      name: "airbox PM <2.5µm"
+      id: "airbox_pm2_5"
+      icon: "mdi:blur"
+      unit_of_measurement: "µg/m³"
+      accuracy_decimals: 1
+    pm_4_0:
+      name: "airbox PM <4µm"
+      id: "airbox_pm4"
+      icon: "mdi:blur"
+      unit_of_measurement: "µg/m³"
+      accuracy_decimals: 1
+    pm_10_0:
+      name: "airbox PM <10µm"
+      id: "airbox_pm10"
+      icon: "mdi:blur"
+      unit_of_measurement: "µg/m³"
+      accuracy_decimals: 1
+
+    pmc_0_5:
+      name: "airbox NC <0.5µm" # Number concentration
+      id: "airbox_nc0_5"
+      icon: "mdi:blur-linear"
+      unit_of_measurement: "#/cm³"
+      accuracy_decimals: 1
+    pmc_1_0:
+      name: "airbox NC <1µm"
+      id: "airbox_nc1"
+      icon: "mdi:blur-linear"
+      unit_of_measurement: "#/cm³"
+      accuracy_decimals: 1
+    pmc_2_5:
+      name: "airbox NC <2.5µm"
+      id: "airbox_nc2_5"
+      icon: "mdi:blur-linear"
+      unit_of_measurement: "#/cm³"
+      accuracy_decimals: 1
+    pmc_4_0:
+      name: "airbox NC <4µm"
+      id: "airbox_nc4"
+      icon: "mdi:blur-linear"
+      unit_of_measurement: "#/cm³"
+      accuracy_decimals: 1
+    pmc_10_0:
+      name: "airbox NC <10µm"
+      id: "airbox_nc10"
+      icon: "mdi:blur-linear"
+      unit_of_measurement: "#/cm³"
+      accuracy_decimals: 1
+
+    pm_size:
+      name: "airbox Typical Particle size"
+      id: "airbox_pm_size"
+      unit_of_measurement: "µm"
+      accuracy_decimals: 1
+
+    address: 0x69
+    update_interval: 15s
+  
