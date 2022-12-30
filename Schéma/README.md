@@ -1,0 +1,1 @@
+Schéma zapojení AirBox
