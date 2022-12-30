@@ -1,0 +1,1 @@
+Home Assistant configuration files
