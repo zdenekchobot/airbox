@@ -16,3 +16,8 @@ Elektronika sensoru využívá běžný modul WeMos D1 Mini s WiFi mikrokontrole
 - samořezné šroubky
 ### Sestavení
 Představu o sestavení senzoru poskytují [fotografie](/Obrázky) z výroby "prototypu". Poněkud nestandardní je upevnění modulu Wemos. Přiložené standardní "hřebínky" jsou **delšímí** piny nasunuty se strany ESP8266 a zapájeny. Na delší piny jsou připájeny propojovací vodče. Kratší piny jsou zasunuty do základny a dostatečně upevňují modul. Pokud potřebujete modul více fixovat, přilepte na ESP8266 oboustranně lepící (teplovodivou) pásku. Po zasunutí pinů do základny druhá strany pásky přilne k základně.      
+## Software
+Jako zákadní software, resp. firmware lze použít standardní, neupravený komunitní firmware. Pro jeho nahrání a konfiguraci je vhodné postupovat podle [návodu na komunitním webu](https://sensor.community/cz/sensors/airrohr/).
+## Home Assistant
+Do AirBoxu lze nahrát i firmware ESPHome, získaná data využít v HA a odtud je odesílat na web [sensor.community](https://sensor.community/cz/). Konfigurační soubory yaml pro ESPHome, služeb odesílání dat včetně automatizace jsou k dispozici ve [složce YAML](/YAML). 
+Konfigurace služeb a automatizace je z větší části práce šikuly [hmmboba](https://github.com/hmmbob/HomeAssistantConfig) - děkuji!   
