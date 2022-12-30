@@ -1,1 +1,4 @@
-# airbox
+# AirBox
+Senzor pro měření stavu ovzduší. Pomocí dvou pokročilých senzorů měří koncentraci pevných částic PM (senzor Sensirion SPS3O) a teplotu, realtivní vlkosti a tlak vzduch (senzor Bosch BME280). Jedná se variantou odvozenou ze sensorů doporučených komunitním projektem [sensor.community](https://sensor.community/cz/). Airbox používá stejné zapojení jako komunitní senzory a je tak plně kompatibilní s jejich firmware.
+## Hardware
+Elektronika sensoru využívá běžný modul WeMos D1 Mini s WiFi mikrokontrolerem ESP8266. Ten tvoří srdce sensoru - po sběrnici i2c komunikuje s SPS30 a BME280 a získaná data odesílá prostřednictvním internetu ke zpracování a publikaci komunitním webům, popřípadě i jinam podle vaší volby. Kvůli umístění ve venkovním prostředí je elektronika umístněna v běžné vodotěsné elektrikářské krabičce. Jednotlivé elektronické komponenty jsou upevněny na jednoduché 3D vytištěné konstrukci, která také zajišťuje vhodné proudění vzduchu. 
