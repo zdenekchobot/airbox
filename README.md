@@ -18,6 +18,9 @@ Elektronika sensoru využívá běžný modul WeMos D1 Mini s WiFi mikrokontrole
 Představu o sestavení senzoru poskytují [fotografie](/Obrázky) z výroby "prototypu". Poněkud nestandardní je upevnění modulu Wemos. Přiložené standardní "hřebínky" jsou **delšímí** piny nasunuty se strany ESP8266 a zapájeny. Na delší piny jsou připájeny propojovací vodče. Kratší piny jsou zasunuty do základny a dostatečně upevňují modul. Pokud potřebujete modul více fixovat, přilepte na ESP8266 oboustranně lepící (teplovodivou) pásku. Po zasunutí pinů do základny druhá strany pásky přilne k základně.      
 ## Software
 Jako zákadní software, resp. firmware lze použít standardní, neupravený komunitní firmware. Pro jeho nahrání a konfiguraci je vhodné postupovat podle [návodu na komunitním webu](https://sensor.community/cz/sensors/airrohr/).
-## Home Assistant
+### Home Assistant
 Do AirBoxu lze nahrát i firmware ESPHome, získaná data využít v HA a odtud je odesílat na web [sensor.community](https://sensor.community/cz/). Konfigurační soubory yaml pro ESPHome, služeb odesílání dat včetně automatizace jsou k dispozici ve [složce YAML](/YAML). 
-Konfigurace služeb a automatizace je z větší části práce šikuly [hmmboba](https://github.com/hmmbob/HomeAssistantConfig) - děkuji!   
+Konfigurace služeb a automatizace je z větší části práce šikuly [hmmboba](https://github.com/hmmbob/HomeAssistantConfig) - děkuji!
+## Tipy
+Místo Wemos D1 mini doporučuji spíše modul [WeMos D1 Mini Pro 16MB](https://www.laskakit.cz/wemos-d1-mini-pro--esp8266-wifi-modul/) kvůli možnosti připojení externí antény, např. [WiFi 42x12mm anténa 2.4G 5dB](https://www.laskakit.cz/wifi-42x12mm-antena-2-4g--5db-u-fl--ipex1--konektor/) nebo [NiceRF snténa 3.0dBi 2.4G](https://www.laskakit.cz/antena-10cm-2-4g/) s příslušným pigtailem.
+Na vrtání velkých děr do krabičky se skvěle osvědčily [stromečkové/stupňovité vrtáky](https://www.lidl.cz/p/parkside-sada-specialnich-vrtaku-psb-6-a1/p100341714004). Velké poděkování [Jiri Janovec](https://twitter.com/jjiik) a [Josef Zvolanek #ePap](https://twitter.com/JosefZvolanek) za radu!  
