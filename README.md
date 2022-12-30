@@ -8,3 +8,4 @@ Elektronika sensoru využívá běžný modul WeMos D1 Mini s WiFi mikrokontrole
 - [WeMos D1 Mini ESP8266 WiFi](https://dratek.cz/arduino/121932-wemos-d1-mini-esp8266-wifi-modul-v2.0.html), originál či klon
 - senzor kvality ovzduší [Sensirion SPS30](https://www.laskakit.cz/senserion-sps30-opticky-senzor-kvality-ovzdusi/)
 - senzor teploty, vlhkosti a tlaku [BME280](https://dratek.cz/arduino/1361-bme280-modul-mereni-teploty-vlhkosti-a-barometrickeho-tlaku-precizni.html)
+- [3D tištěné díly](/STL)
