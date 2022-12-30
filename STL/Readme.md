@@ -1,1 +1,1 @@
-3D tištěný díly
+3D tištěné díly
