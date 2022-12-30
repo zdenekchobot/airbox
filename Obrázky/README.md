@@ -1,0 +1,1 @@
+Fotografie z výroby
