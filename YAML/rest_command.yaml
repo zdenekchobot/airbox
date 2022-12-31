@@ -1,4 +1,4 @@
-## add line 'rest_command: !include rest_command.yaml' to configuration.yaml !!  
+## add line 'rest_command: !include rest_command.yaml' to configuration.yaml !! 
 
 send_luftdaten_pm:
   url: http://api.sensor.community/v1/push-sensor-data/
@@ -6,13 +6,15 @@ send_luftdaten_pm:
   content_type: "application/json"
   timeout: 30
   headers:
-    X-Pin: 1 ## SPS30 data
+    X-Pin: 1 ## This tells Luftdaten that it is SPS30 data
     X-Sensor: !secret luftdaten_x_sensor
   payload: >-
     {
       "software_version": "HomeAssistant",
       "sensordatavalues":[
+        {"value_type":"P0","value":"{{ states('sensor.airbox_pm_1um') }}"},  
         {"value_type":"P2","value":"{{ states('sensor.airbox_pm_2_5um') }}"},
+        {"value_type":"P4","value":"{{ states('sensor.airbox_pm_4um') }}"},
         {"value_type":"P1","value":"{{ states('sensor.airbox_pm_10um') }}"}
       ]
     }
@@ -23,7 +25,7 @@ send_luftdaten_tph:
   content_type: "application/json"
   timeout: 30
   headers:
-    X-Pin: 11 ## BME280 data
+    X-Pin: 11 ## This tells Luftdaten that it is BME280 data
     X-Sensor: !secret luftdaten_x_sensor
   payload: >-
     {
@@ -46,10 +48,10 @@ send_madavi:
     {
       "software_version": "HomeAssistant", 
       "sensordatavalues":[
-        {"value_type":"P0","value":"{{ states('sensor.airbox_pm_1um') }}"},
-        {"value_type":"P2","value":"{{ states('sensor.airbox_pm_2_5um') }}"},
-        {"value_type":"P4","value":"{{ states('sensor.airbox_pm_4um') }}"},
-        {"value_type":"P1","value":"{{ states('sensor.airbox_pm_10um') }}"},
+        {"value_type":"SPS30_P0","value":"{{ states('sensor.airbox_pm_1um') }}"},
+        {"value_type":"SPS30_P2","value":"{{ states('sensor.airbox_pm_2_5um') }}"},
+        {"value_type":"SPS30_P4","value":"{{ states('sensor.airbox_pm_4um') }}"},
+        {"value_type":"SPS30_P1","value":"{{ states('sensor.airbox_pm_10um') }}"},
         {"value_type":"BME280_temperature","value":"{{ states('sensor.airbox_bme280_temperature') }}"},
         {"value_type":"BME280_pressure","value":"{{ ((states('sensor.airbox_bme280_pressure') | float(default=0)) * 100) | round }}"},
         {"value_type":"BME280_humidity","value":"{{ states('sensor.airbox_bme280_humidity') }}"}
