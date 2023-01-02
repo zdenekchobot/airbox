@@ -6,7 +6,7 @@ Elektronika senzoru využívá běžný modul WeMos D1 Mini s WiFi mikrokontrole
 - krabička [SCAME SCABOX 120x80x50mm IP56](https://www.elfetex.cz/10-078-693-scame-krabice-scabox-120x80x50mm-ip56)
 - 2x [nerez sítko ke zpětné klapce DN15 - 1/2"](https://www.obchod-vtp.cz/nerez-sitko-ke-zpetne-klapce-dn15-1-2)
 - [WeMos D1 Mini ESP8266 WiFi](https://dratek.cz/arduino/121932-wemos-d1-mini-esp8266-wifi-modul-v2.0.html), originál či klon
-- senzor kvality ovzduší [Sensirion SPS30](https://www.laskakit.cz/senserion-sps30-opticky-senzor-kvality-ovzdusi/)
+- senzor kvality ovzduší [Sensirion SPS30](https://www.soselectronic.cz/products/sensirion/sps30-2-304234)
 - senzor teploty, vlhkosti a tlaku [BME280](https://dratek.cz/arduino/1361-bme280-modul-mereni-teploty-vlhkosti-a-barometrickeho-tlaku-precizni.html)
 - [3D tištěné díly](/STL)
 - gumová průchodka napájecího kablíku, např. [FIX-GR-98](https://www.tme.eu/cz/details/fix-gr-98/pruchodky/fix-fasten/)
