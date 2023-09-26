@@ -1,5 +1,7 @@
 esphome:
   name: airbox
+  platformio_options:
+    board_build.f_cpu: 80000000L
 
 esp8266:
   board: esp07
@@ -12,15 +14,15 @@ i2c:
 
 # Enable logging
 logger: 
-  level: INFO
+  level: info
 
 # Enable Home Assistant API
 api:
   encryption:
-    key: "TOfs2rJCtIp/9dy8yjqE9XkabR81tHzxCQAajmeBZQI="
+    key: "TOfsRrJCtIp/9dy8yjqE9XkwbR81tHzxCQAajmeBZQI="
 
 ota:
-  password: "1547e8a12c61e76795c9fa0fd143165c"
+  password: "1547e8a15c61e76705c9fa0fd143165c"
 
 wifi:
   fast_connect: True
@@ -30,7 +32,7 @@ wifi:
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "airbox Fallback Hotspot"
-    password: "buPtbyk6mLkS"
+    password: "buPthyk6mLkS"
 
 captive_portal:
     
@@ -43,6 +45,8 @@ sensor:
       unit_of_measurement: "°C"
       device_class: "temperature"
       accuracy_decimals: 1
+      filters:
+        - offset: -2.2 ## my sensor individual calibration
     pressure:
       name: "airbox BME280 Pressure"
       id: "airbox_pressure"
@@ -59,6 +63,17 @@ sensor:
     i2c_id: bus_a
     address: 0x76
     update_interval: 15s
+  - platform: template
+    name: "airbox BME280 Sea level pressure"
+    id: "airbox_sea_level_pressure"
+    update_interval: 15s
+    unit_of_measurement: 'hPa'
+    device_class: pressure
+    accuracy_decimals: 2
+    lambda: |-
+      const float STANDARD_ALTITUDE = 500.0; // in meters
+      return id(airbox_pressure).state / powf(1 - ((0.0065 * STANDARD_ALTITUDE) /
+      (id(airbox_temperature).state + (0.0065 * STANDARD_ALTITUDE) + 273.15)), 5.257); // in hPa
     
   - platform: sps30
     pm_1_0:
@@ -116,13 +131,20 @@ sensor:
       icon: "mdi:blur-linear"
       unit_of_measurement: "#/cm³"
       accuracy_decimals: 1
-
     pm_size:
       name: "airbox Typical Particle size"
       id: "airbox_pm_size"
       unit_of_measurement: "µm"
       accuracy_decimals: 1
-
     address: 0x69
     update_interval: 15s
+
+  - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
+    name: "WiFi RSSI"
+    id: wifi_signal_db
+    update_interval: 60s
+    entity_category: "diagnostic"
+
+web_server:
+  port: 80
   
